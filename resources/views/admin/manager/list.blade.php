@@ -30,7 +30,7 @@
                 <tr data-row>
                     <td data-mark>{{ $data->id }}</td>
                     <td data-mark>{{ $data->userId }}</td>
-                    <td data-mark>{{ $data->pwd}}</td>
+                    <td data-mark>{{ $data->pwd }}</td>
                     <td>
                         <div class="actions">
                             <a href="/admin/manager/edit/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
@@ -44,12 +44,8 @@
     </div>
 
     <div class="admin-table-info">
-        <span>共 <b data-total>2</b> 筆</span>
-        <nav class="pagination">
-            <span class="disabled"><i class="fa fa-chevron-left"></i></span>
-            <span class="active">1</span>
-            <span class="disabled"><i class="fa fa-chevron-right"></i></span>
-        </nav>
+        <span>共 <b>{{ $total }}</b> 筆</span>
+        {{ $list->links() }}
     </div>
 </div>
 @endsection

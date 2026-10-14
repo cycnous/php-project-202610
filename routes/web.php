@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin'], function(){
         Route::prefix('manager')->group(function(){
             // 網址: /admin/manager/list
             Route::get('list', [ManagerController::class, 'list']);
+            Route::get('create', [ManagerController::class, 'create']);
         });
     });
 });
