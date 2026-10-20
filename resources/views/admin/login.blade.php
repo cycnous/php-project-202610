@@ -26,12 +26,33 @@
       @endif
     </div>
 
+    <!-- 1. 欄位說明
+         form: 處理表單, 所有要送出的資料欄位都要在<form>與</form>之間
+         action: 資料輸入後送到哪個網址 ->該網址在路由也要設定
+         method: 送出的方法, 通常只會有get和post, 
+                 Laravel 還另有put, patch, delete
+                 表單一般用post, 可回傳大筆資料, 且不會出現網址列, 較安全
+         @csrf:  權杖(token), 在Laravel中, 所有表單都要加上@csrf
+                 表示是由自己網站所送出的, 不是由他人在遠端送出, 保障網頁的安全
+                 @csrf 會自動轉換成: <input type="hidden" name="_token" value="xxxxxxxxxxxxxxxx" autocomplete="off"> 
+          
+         2. 要在路由設定 Route::post('/admin/login', [AdminController::class, 'login']);
+            為何要用Route::post? 因為form method='post'
+         3. 要在Admincontroller中新增 public function login()
+    -->
     <form action="/admin/login" method="post">
         @csrf
       <div class="form-group">
         <label class="form-label" for="userId">帳號</label>
         <div class="input-icon-wrap">
           <i class="fa fa-user-shield icon"></i>
+          <!-- id: 是給瀏覽器或javascript控制用的
+               name: 後端接收資料用的名稱
+               class="form-control: bootstrap中輸入框的css
+               required: 使用jquery的必填
+               autofocus: 自動取得焦點, 游標會自動停佇在這裡
+               value: 預設值, 取得變數-上一筆輸入的userId 
+          -->
           <input type="text" id="userId" name="userId" class="form-control" required autofocus
           value="{{ old('userId') }}" />
         </div>

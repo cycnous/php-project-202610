@@ -5,6 +5,17 @@ use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Route;
 
+// 所有的網址(超連結, href)或表單(form)都要在路由設定
+// Route:路由, :: 呼叫靜態函示, get:超連結
+// 'admin': 表示網址為http://127.0.0.1:8000/admin, 
+//          如果是正式網站則是https://www.xxx.com.tw/admin
+//          https: SSL加密機制, 保證在資料傳輸過程中將資料加密, 不易被解析, 埠號(port)為443
+// AdminController::class, 當網址為http://127.0.0.1:8000/admin 時, 會執行AdminController這個程式
+// 'index', AdminController要執行的功能(或函式, function)
+
+// Route::post, 通常是表單送資料到網站
+// 登入的網址(login.blade.php), 因為form method是post, 所以用Route::post
+
 Route::get('/', [IndexController::class, 'index']);
 
 // Route::get('/admin', [AdminController::class, 'index']);
