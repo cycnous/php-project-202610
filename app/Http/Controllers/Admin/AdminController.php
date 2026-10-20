@@ -19,6 +19,9 @@ class AdminController extends Controller
         // 3. 在routes/web/php 新增路由, use 可以依靠擴充PHP Intelephense自動帶出
         //    Route::get('/admin', [AdminController::class, 'index']);
         //    use App\Http\Controllers\Admin\AdminController;
+        // 4. 如果server沒有啟動,在終端機輸入php artisan serve 啟動伺服器
+        // 5. 在瀏覽器輸入http://127.0.0.1:8000/admin,即可看到後台登入頁面
+        // 6. 將範例網頁的CSS和JS資料夾, 複製到public資料夾下
         return view("admin.login");
     }
 

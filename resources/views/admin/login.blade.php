@@ -1,3 +1,8 @@
+<!-- 
+ 1. 將範例網頁的admin/login.html複製貼上
+ 2. 修改css,js的路徑全部改成從根目錄(/)開始
+-->
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
