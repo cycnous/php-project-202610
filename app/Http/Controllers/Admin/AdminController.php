@@ -11,6 +11,14 @@ class AdminController extends Controller
 {
     public function index()
     {
+        // 回傳admin資料夾中的login網頁(login.blade.php)
+        // 所有網頁都在resources/views之下
+        // 1. 新增Admin/Admincontroller
+        //    php artisan make:controller Admin/Admincontroller)
+        // 2. 在resources/views新增(資料夾)admin/(檔案)login.blade.php
+        // 3. 在routes/web/php 新增路由, use 可以依靠擴充PHP Intelephense自動帶出
+        //    Route::get('/admin', [AdminController::class, 'index']);
+        //    use App\Http\Controllers\Admin\AdminController;
         return view("admin.login");
     }
 

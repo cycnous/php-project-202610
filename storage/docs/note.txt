@@ -1,0 +1,11 @@
+目前主流框架(主流程式)都是MVC架構
+• Model（模型）：
+	• 職責：管理應用程式的資料、商業邏輯、資料庫存取與驗證規則。
+	• 特性：不依賴 View 或 Controller，負責實際執行資料的查詢、新增、修改、刪除（CRUD）與演算法。
+• View（視圖）：
+	• 職責：負責將資料轉換為使用者介面（UI）進行呈現（例如 HTML 網頁樣板）。
+	• 特性：只專注於畫面顯示，本身不包含複雜的商業邏輯運算。
+• Controller（控制器）：
+	• 職責：作為 Model 與 View 之間的橋樑。
+	• 特性：接收使用者的請求、調用對應的 Model 處理資料，最後選擇適合的 View 將結果回傳給使用者。
+    • .net MVC、Java:spring boot、Laravel(PHP)、VUE、angular、react等
