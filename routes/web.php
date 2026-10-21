@@ -18,22 +18,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);
 
-// Route::get('/admin', [AdminController::class, 'index']);
-// Route::post('/admin/login', [AdminController::class, 'login']);
-// Route::get('/admin/home', [AdminController::class, 'home']);
+Route::get('/admin', [AdminController::class, "index"]);
+// 登入的網址, 因為resources/views/admin/login.blade.php中form的method為post, 所以要用Route::post
+Route::post("/admin/login", [AdminController::class, "login"]); // 登入
+Route::get('/admin/home', [AdminController::class, "home"]);// 後台首頁
+Route::get("/manager/list", [ManagerController::class, "list"]);//帳號管理
+Route::get("/manager/create", [ManagerController::class, "create"]);//新增帳號
+Route::post("/manager/store", [ManagerController::class, "store"]);//儲存帳號
+// {}:表示有帶資料進來, {id}中的id為變數名稱
+// 如果是{id?}有問號, 表示可能有帶資料,也可能沒帶資料
+Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]);
+Route::post("/manager/update", [ManagerController::class, "update"]);
 
-Route::group(['prefix' => 'admin'], function(){
-    Route::get('/', [AdminController::class, 'index']);
-    Route::post('login', [AdminController::class, 'login']);
-    Route::get('home', [AdminController::class, 'home'])->middleware('manager');
-    Route::get('logout', [AdminController::class, 'logout']);
+// Route::group(['prefix' => 'admin'], function(){
+//     Route::get('/', [AdminController::class, 'index']);
+//     Route::post('login', [AdminController::class, 'login']);
+//     Route::get('home', [AdminController::class, 'home'])->middleware('manager');
+//     Route::get('logout', [AdminController::class, 'logout']);
 
-    Route::middleware('manager')->group(function(){
-        // 網址: /admin/manager
-        Route::prefix('manager')->group(function(){
-            // 網址: /admin/manager/list
-            Route::get('list', [ManagerController::class, 'list']);
-            Route::get('create', [ManagerController::class, 'create']);
-        });
-    });
-});
+//     Route::middleware('manager')->group(function(){
+//         // 網址: /admin/manager
+//         Route::prefix('manager')->group(function(){
+//             // 網址: /admin/manager/list
+//             Route::get('list', [ManagerController::class, 'list']);
+//             Route::get('create', [ManagerController::class, 'create']);
+//         });
+//     });
+// });

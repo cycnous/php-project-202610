@@ -1,51 +1,40 @@
-@extends('admin.layout');
-@section('title', '帳號管理');
-@section('content')
-<div class="admin-card" data-crud-list>
-    <div class="admin-card-header">
-        <h2><i class="fa fa-user-shield"></i> 管理員列表</h2>
-        <div class="admin-toolbar">
-            <!-- 關鍵字即時查詢：輸入時自動篩選並標示關鍵字 -->
-            <form class="search-box">
-                <i class="fa fa-search"></i>
-                <input type="search" name="keyword" class="form-control" placeholder="搜尋姓名 / 帳號 / Email" autocomplete="off" />
-            </form>
-            <button type="button" class="btn btn-light btn-sm" data-clear><i class="fa fa-times"></i> 清除</button>
-            <a href="/admin/manager/create" class="btn btn-gold btn-sm"><i class="fa fa-plus"></i> 新增帳號</a>
-        </div>
-    </div>
+{{--
+帳號列表
+新增帳號
+1.在ManagerController中新增public function create()
+2.在路中routes/web.php中新增/manager/create
+3.在resources/views/admin/manager中新增create.blade.php
+4.在ManagerController新增public function delete(Request $req)
 
-    <div class="table-wrap">
-        <table class="data-table admin-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>帳號</th>
-                    <th>密碼</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($list as $data)
-                <tr data-row>
-                    <td data-mark>{{ $data->id }}</td>
-                    <td data-mark>{{ $data->userId }}</td>
-                    <td data-mark>{{ $data->pwd }}</td>
-                    <td>
-                        <div class="actions">
-                            <a href="/admin/manager/edit/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
-                            <button type="button" class="btn btn-danger-outline btn-xs" data-delete data-name="系統管理員" data-blocked="不能刪除目前登入中的帳號"><i class="fa fa-trash"></i> 刪除</button>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    <div class="admin-table-info">
-        <span>共 <b>{{ $total }}</b> 筆</span>
-        {{ $list->links() }}
-    </div>
-</div>
-@endsection
+修改帳號
+1.新增<td>修改</td>
+2.在foreach中新增<td><a href="/manager/edit/{{ $data->id }}">修改</a></td>
+3.在路由新增Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]);
+4.在ManagerController新增public function edit(Request $req)
+5.在resources/views/admin/manager中新增edit.blade.php
+--}}
+<div><a href="create">新增</a></div>
+<table width="100">
+    <tr>
+        <td>帳號</td>
+        <td>密碼</td>
+        <td>修改</td>
+    </tr>
+    {{--
+        foreach:對所有的資料
+        $list: 由ManagerController的list function 中傳過來的所有帳號資料
+        $list as $data: 對於帳號的每一筆資料均由$data來表示
+        $data->userId: userId為manager資料表中的userId欄位名稱
+        $data->pwd: pwd為manager資料表中的pwd欄位名稱
+        在php中->表示[的]意思, 如同在java中用.
+        foreach開始, 要有endforeach結束
+    --}}
+    @foreach($list as $data)
+    <tr>
+        <td>{{ $data->userId }}</td>
+        <td>{{ $data->pwd }}</td>
+        <td><a href="/manager/edit/{{ $data->id }}">修改</a></td>
+        <td><a href="/manager/edit/{{ $data->id }}">刪除</a></td>
+    </tr>
+    @endforeach
+</table>

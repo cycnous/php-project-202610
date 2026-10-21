@@ -74,6 +74,7 @@ class AdminController extends Controller
         }
     }
 
+    // 後台首頁
     public function home()
     {
         return view('admin.home');
