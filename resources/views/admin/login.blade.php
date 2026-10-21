@@ -20,10 +20,21 @@
     <div class="auth-logo"><div class="logo-box">B</div><span>品牌名稱</span></div>
     <div class="auth-title">
       <h2>後台管理系統</h2>
-      <p>請使用管理員帳號登入（示範：admin / admin1234）</p>
-      @if($errors->has('msg'))
+      <!-- <p>請使用管理員帳號登入（示範：admin / admin1234）</p> -->
+       
+      <!-- 這是html的註解 -->
+       {{-- 
+          這是laravel blade 的註解
+          msg: 由AdminController login function回傳的錯誤訊息名稱
+          在blade中的條件判斷式、廻圈..等都要有結束符號
+          例如 if endif, for endfor, foreach endforeach, section endsection
+          其他程式語言則為  if{}、for{}、foreach{}、while{}...
+       --}}
+
+      <p>@if($errors->has('msg'))
         <div class="text-danger">{{ $errors->first('msg') }}</div>
       @endif
+      </p>
     </div>
 
     <!-- 1. 欄位說明
@@ -51,7 +62,8 @@
                class="form-control: bootstrap中輸入框的css
                required: 使用jquery的必填
                autofocus: 自動取得焦點, 游標會自動停佇在這裡
-               value: 預設值, 取得變數-上一筆輸入的userId 
+               value: 這個欄位所輸入的值
+               old: 原本輸入的文字
           -->
           <input type="text" id="userId" name="userId" class="form-control" required autofocus
           value="{{ old('userId') }}" />

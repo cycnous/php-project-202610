@@ -40,13 +40,26 @@ class ManagerController extends Controller
             $list要與compact("list")中的"list"名稱一致
             compact:將取得的資料渲染(在網頁中呈現)到網頁中(admin.manager.list)
         */
-        return view("admin.manager.list", compact("list"));
+        // return view("admin.manager.list", compact("list"));
+
+        // 套版開始
+        // 1.建立新網頁admin/manager/list1.blade.php
+        // 2.開啟範例網站admin/admins.html, 複製貼上到list1.blade.php
+        // 3.將list1.blade.php的css及js的路徑改成根目錄(/)
+        // 4.將原本retuen view改成新網頁list1
+
+        return view("admin.manager.list1", compact("list"));
     }
 
     // 新增管理帳號
     public function create()
     {
-        return view("admin.manager.create");
+        // return view("admin.manager.create");
+        // 1.新增/admin/manager/create1.blade.php
+        // 2.開啟範例網站/admin/admins-forms.html, 複製貼上到create1.blade.php
+        // 3.將create1.blade.php的css及js的路徑改成根目錄(/)
+        // 4.將原本retuen view改成新網頁create1
+        return view("admin.manager.create1");
     }
 
     // 儲存新增的帳號
@@ -96,5 +109,19 @@ class ManagerController extends Controller
     {
         Manager::destroy($req->id);
         return redirect("/manager/list");
+    }
+
+    // 檢查帳號
+    public function checkAccount(Request $req)
+    {
+        $manager = (new Manager())->checkAccount($req->userId);
+
+        // !: 不是(非), !empty(): 不是空的, 表示有資料
+        if (!empty($manager))
+        {
+            // echo: 輸出, php的用法
+            // .net 用Response.write; java 用system.out.print; jsp用out.print
+            echo('exist');
+        }
     }
 }

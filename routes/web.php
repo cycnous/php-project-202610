@@ -27,8 +27,10 @@ Route::get("/manager/create", [ManagerController::class, "create"]);//新增帳�
 Route::post("/manager/store", [ManagerController::class, "store"]);//儲存帳號
 // {}:表示有帶資料進來, {id}中的id為變數名稱
 // 如果是{id?}有問號, 表示可能有帶資料,也可能沒帶資料
-Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]);
-Route::post("/manager/update", [ManagerController::class, "update"]);
+Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]); // 修改帳號
+Route::post("/manager/update", [ManagerController::class, "update"]); // 更新帳號
+Route::get("/manager/delete/{id}", [ManagerController::class, "delete"]); // 刪除帳號
+Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"]); // 檢查帳號
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);

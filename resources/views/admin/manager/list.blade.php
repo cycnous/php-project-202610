@@ -34,7 +34,7 @@
         <td>{{ $data->userId }}</td>
         <td>{{ $data->pwd }}</td>
         <td><a href="/manager/edit/{{ $data->id }}">修改</a></td>
-        <td><a href="/manager/edit/{{ $data->id }}">刪除</a></td>
+        <td><a href="/manager/delete/{{ $data->id }}">刪除</a></td>
     </tr>
     @endforeach
 </table>
