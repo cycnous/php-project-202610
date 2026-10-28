@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
+use App\Http\Controllers\Admin\MileStoneController;
+use App\Http\Controllers\Admin\MileStoneTypeController;
 use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);
 
+// 後台首頁
 Route::get('/admin', [AdminController::class, "index"]);
 // 登入的網址, 因為resources/views/admin/login.blade.php中form的method為post, 所以要用Route::post
 Route::post("/admin/login", [AdminController::class, "login"]); // 登入
 Route::get('/admin/home', [AdminController::class, "home"]);// 後台首頁
+
+// 帳號管理
 Route::get("/manager/list", [ManagerController::class, "list"]);//帳號管理
 Route::get("/manager/create", [ManagerController::class, "create"]);//新增帳號
 Route::post("/manager/store", [ManagerController::class, "store"]);//儲存帳號
@@ -31,6 +36,13 @@ Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]); // 修改�
 Route::post("/manager/update", [ManagerController::class, "update"]); // 更新帳號
 Route::get("/manager/delete/{id}", [ManagerController::class, "delete"]); // 刪除帳號
 Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"]); // 檢查帳號
+
+// 大事記管理
+Route::get('/admin/milestone/list', [MileStoneController::class, 'list']);
+// 大事記類別管理
+Route::get('/admin/milestone/types/list', [MileStoneTypeController::class, 'list']);
+// 新建大事記類別
+Route::get('/admin/milestone/types/create', [MileStoneTypeController::class, 'create']);
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);
