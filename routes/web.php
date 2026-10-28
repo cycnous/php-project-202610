@@ -43,6 +43,8 @@ Route::get('/admin/milestone/list', [MileStoneController::class, 'list']);
 Route::get('/admin/milestone/types/list', [MileStoneTypeController::class, 'list']);
 // 新建大事記類別
 Route::get('/admin/milestone/types/create', [MileStoneTypeController::class, 'create']);
+// 儲存大事記類別
+Route::post('/admin/milestone/types/store', [MileStoneTypeController::class, 'store']);
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);

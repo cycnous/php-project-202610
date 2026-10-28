@@ -39,4 +39,7 @@
 20. 在 MileStoneTypeController function 中取出 MileStoneType model資料
 21. 將 MileStoneTypeController function 中的資料渲染到 resources/views/admin/milestone/types/list.blade.php
 22. 開啟範例網頁的 milestones.html 複製貼上到 resources/views/admin/milestone/types/list.blade.php (範例沒有大事記類別的網頁,借用這個網頁再調整欄位)
+23. 在瀏覽器開啟 http://127.0.0.1:8000/admin/milestone/types/list 
+24. 修改css, js路徑從根目錄開始, 接著套程式
+    '../': 回到上一層, 相對路徑; '/': 根目錄, 絕對路徑
 -->

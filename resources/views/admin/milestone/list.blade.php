@@ -23,7 +23,8 @@
       <div class="nav-group">網站內容</div>
       <a href="banners.html"><i class="fa fa-images"></i> 首頁輪播</a>
       <a href="features.html"><i class="fa fa-medal"></i> 特色 / 核心價值</a>
-      <a href="milestones.html" class="active"><i class="fa fa-history"></i> 大事記</a>
+      <a href="/admin/milestone/list" class="active"><i class="fa fa-history"></i> 大事記</a>
+      <a href="/admin/milestone/types/list"><i class="fa fa-history"></i> 大事記類別</a>
       <a href="team-members.html"><i class="fa fa-users"></i> 核心團隊</a>
       <a href="settings.html"><i class="fa fa-cog"></i> 網站設定</a>
       <div class="nav-group">最新消息</div>
@@ -37,7 +38,7 @@
       <a href="members.html"><i class="fa fa-user-friends"></i> 會員管理</a>
       <a href="addresses.html"><i class="fa fa-map-marker-alt"></i> 會員地址</a>
       <div class="nav-group">系統</div>
-      <a href="admins.html"><i class="fa fa-user-shield"></i> 管理員</a>
+      <a href="/manager/list"><i class="fa fa-user-shield"></i> 管理員</a>
     </nav>
   </aside>
 
