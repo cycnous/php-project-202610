@@ -40,11 +40,9 @@
                     },
                     // success: 後端成功回傳資料
                     // msg: 後端回傳的資料, msg可自己命名
-                    success: function(msg)
-                    {
+                    success: function(msg) {
                         // trim(): 去除左右空白
-                        if (msg.trim() == 'exist')
-                        {
+                        if (msg.trim() == 'exist') {
                             // 在id='msg'中寫入html語法
                             // focus(): 將游標移回到userId這個輸入框
                             $('#msg').html('<font color="red">帳號已存在</font>');
@@ -112,7 +110,9 @@
                 </div>
                 <div class="admin-card-body">
                     <!-- 網址帶 ?id=編號 時為「修改」，會自動帶入資料 -->
-                    <form class="admin-form" data-back="/manager/list" novalidate action='/manager/store' method='post'>
+                    <!-- 移除class="admin-form" 問AI: initForm 裡 的e.preventDefault() 阻止了預設送出：它把瀏覽器本來要把資料 POST 給 Laravel 後端的行為給取消了。
+                         <form class="admin-form" data-back="/manager/list" novalidate action='/manager/store' method='post'> -->
+                    <form data-back="/manager/list" novalidate action='/manager/store' method='post'>
                         @csrf
                         <div class="form-row">
                             <!-- <div class="form-group">
@@ -139,7 +139,9 @@
                             <div class="input-icon-wrap">
                                 <i class="fa fa-lock icon"></i>
                                 <!-- name改為欄位名稱pwd -->
-                                <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" autocomplete="new-password" required data-required-on-create>
+                                <!-- 移除 data-required-on-create autocomplete="new-password" 
+                                     <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" autocomplete="new-password" required data-required-on-create> -->
+                                <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" required>
                             </div>
                         </div>
                         <!-- <div class="form-group">
