@@ -139,9 +139,7 @@
                             <div class="input-icon-wrap">
                                 <i class="fa fa-lock icon"></i>
                                 <!-- name改為欄位名稱pwd -->
-                                <!-- 移除 data-required-on-create autocomplete="new-password" 
-                                     <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" autocomplete="new-password" required data-required-on-create> -->
-                                <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" required>
+                                <input type="password" id="f_password" name="pwd" class="form-control" placeholder="至少 8 個字元" autocomplete="new-password" required data-required-on-create>
                             </div>
                         </div>
                         <!-- <div class="form-group">
