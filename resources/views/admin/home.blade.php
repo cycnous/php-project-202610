@@ -42,4 +42,14 @@
 23. 在瀏覽器開啟 http://127.0.0.1:8000/admin/milestone/types/list 
 24. 修改css, js路徑從根目錄開始, 接著套程式
     '../': 回到上一層, 相對路徑; '/': 根目錄, 絕對路徑
+
+
+-後台樣板
+1. 在 resources/views/admin 下新增 layout.blade.php
+2. 開啟 admin/milestone/types/list.blade.php
+3. 全選複製貼到 admin/layout.blade.php
+4. 為何要用 admin/milestone/types/list.blade.php?
+   因為剛才有做新功能, 可能重複使用
+5. 修改 layout.blade.php
+
 -->

@@ -45,6 +45,13 @@ Route::get('/admin/milestone/types/list', [MileStoneTypeController::class, 'list
 Route::get('/admin/milestone/types/create', [MileStoneTypeController::class, 'create']);
 // 儲存大事記類別
 Route::post('/admin/milestone/types/store', [MileStoneTypeController::class, 'store']);
+// 修改大事記類別
+Route::get('/admin/milestone/types/edit/{id}', [MileStoneTypeController::class, 'edit']);
+// 更新大事記類別
+Route::post('/admin/milestone/types/update', [MileStoneTypeController::class, 'update']);
+// 刪除大事記類別
+Route::post('/admin/milestone/types/delete', [MileStoneTypeController::class, 'delete']);
+
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);

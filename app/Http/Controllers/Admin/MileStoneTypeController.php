@@ -70,4 +70,27 @@ class MileStoneTypeController extends Controller
       $types = MileStoneType::find($req->id);
       return view('admin.milestone.types.edit', compact('types'));
    }
+
+   // 更新
+   public function update(Request $req)
+   {
+      // $req->id: edit.blade.php 中 <input type='hidden' name='id' value={{ $types->id }}'>
+      $types = MileStoneType::find($req->id);
+      // $types->label: milestone_tpye 資料表的 label 欄位;
+      // $req->label: 表單中標籤欄位所填的資料
+      $types->label = $req->label;
+      $types->title = $req->title;
+      // 也可以用 $types->save();
+      $types->update();  
+
+      // 參考 store function 的說明
+      Session::flash('message', '已修改完畢');
+      return redirect('/admin/milestone/types/list');
+   }
+
+   // 刪除
+   public function delete(Request $req)
+   {
+      MileStoneType::destroy($req->id);      
+   }
 }
