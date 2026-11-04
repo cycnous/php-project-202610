@@ -1,55 +1,117 @@
-後台首頁
-<div><a href="/manager/list">帳號管理</a></div>
-<div><a href="/milestone/list">大事記管理</a></div>
-<!--
-帳號管理
-1.新增ManagerController： php artisan make:controller Admin/ManagerController
-2.在ManagerController中新增public function list():帳號列表
-3.在路由routes/web.php中新增/manager/list
-4.在resources/views/admin新增manager資料夾
-5.在resources/views/admin/manager新增list.blade.php
-
-大事記管理
-1. 新增大事記管理控制器 Admin/MileStoneController: php artisan make:controller Admin/MileStoneController
-2. 在 Admin/MileStoneController 中新增 public function list() : 大事記列表
-3. 在路由 routes/web.php 中新增 /admin/milestone/list
-4. 在 resources/views/admin 新增 milestone資料夾
-5. 在 resources/views/admin/milestone 新增 list.blade.php
-6. 開啟範例網頁的 milestones.html 複製貼上到 resources/views/admin/milestone/list.blade.php
-
-7. 新增大事記類別管理控制器 Admin/MileStoneTypeController: php artisan make:controller Admin/MileStoneTypeController
-
--大事記類別列表
-8. 在 Admin/MileStoneTypeController 中新增 public function list()
-9. 在路由 routes/web.php 中新增 /admin/milestone/typess/list
-10. 在 resources/views/admin/milestone 新增 types資料夾: 大事記類別
-11. 在 resources/views/admin/milestone/types 新增 list.blade.php
-
--大事記類別
-12. 在 Admin/MileStoneTypeController 中新增 public function create()
-13. 在路由 routes/web.php 中新增 /admin/milestone/types/create
-14. 在 resources/views/admin/milestone/types 新增 create.blade.php
-
-15. 新增Model MileStoneType: php artisan make:model Milestone/MileStoneType
-16. 新增Model Milestone: php artisan make:model Milestone/MileStone
-17. 新增資料表 大事記類別(milestone_type): 欄位: id A_I, label varchar(10), title varchar(10)
-18. 新增資料表 大事記(milestone): 欄位: id A_I, typeId int, years char(4), months char(2), title varchar(200), content varchar(500), createTime timestamp 預設CURRENT_TIMESTAMP
-19. 完成 MileStoneType & Milestone 兩個Model內容
-
-20. 在 MileStoneTypeController function 中取出 MileStoneType model資料
-21. 將 MileStoneTypeController function 中的資料渲染到 resources/views/admin/milestone/types/list.blade.php
-22. 開啟範例網頁的 milestones.html 複製貼上到 resources/views/admin/milestone/types/list.blade.php (範例沒有大事記類別的網頁,借用這個網頁再調整欄位)
-23. 在瀏覽器開啟 http://127.0.0.1:8000/admin/milestone/types/list 
-24. 修改css, js路徑從根目錄開始, 接著套程式
-    '../': 回到上一層, 相對路徑; '/': 根目錄, 絕對路徑
-
-
--後台樣板
-1. 在 resources/views/admin 下新增 layout.blade.php
-2. 開啟 admin/milestone/types/list.blade.php
-3. 全選複製貼到 admin/layout.blade.php
-4. 為何要用 admin/milestone/types/list.blade.php?
-   因為剛才有做新功能, 可能重複使用
-5. 修改 layout.blade.php
-
+@extends('admin.layout')
+@section('title', '後台首頁')
+@section('content')
+<!-- 
+    1. 開啟範例網頁 admin/index.html
+    2. 複製 <main class="admin-content"></main> 的內容貼上
 -->
+<div class="dash-grid">
+    <a href="members.html" class="dash-card">
+        <div class="dash-icon"><i class="fa fa-user-friends"></i></div>
+        <div>
+            <div class="dash-num">3</div>
+            <div class="dash-label">會員數</div>
+        </div>
+    </a>
+    <a href="products.html" class="dash-card">
+        <div class="dash-icon gold"><i class="fa fa-box-open"></i></div>
+        <div>
+            <div class="dash-num">9</div>
+            <div class="dash-label">上架產品</div>
+        </div>
+    </a>
+    <a href="news.html" class="dash-card">
+        <div class="dash-icon green"><i class="fa fa-newspaper"></i></div>
+        <div>
+            <div class="dash-num">8</div>
+            <div class="dash-label">最新消息</div>
+        </div>
+    </a>
+    <a href="orders.html" class="dash-card">
+        <div class="dash-icon red"><i class="fa fa-receipt"></i></div>
+        <div>
+            <div class="dash-num">2</div>
+            <div class="dash-label">待處理訂單</div>
+        </div>
+    </a>
+</div>
+
+<div class="admin-card">
+    <div class="admin-card-header">
+        <h2><i class="fa fa-receipt"></i> 最新訂單</h2>
+        <div class="text-muted">累計營收（不含取消）：<b class="text-brand">NT$ 15,200</b></div>
+    </div>
+    <div class="table-wrap">
+        <table class="data-table admin-table">
+            <thead>
+                <tr>
+                    <th>訂單編號</th>
+                    <th>會員</th>
+                    <th>收件人</th>
+                    <th>金額</th>
+                    <th>狀態</th>
+                    <th>下單時間</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="num">ORD202511180001</td>
+                    <td>王小明</td>
+                    <td>王小明</td>
+                    <td class="num">NT$ 5,960</td>
+                    <td><span class="badge badge-blue">出貨中</span></td>
+                    <td>2025-11-18 10:00</td>
+                    <td>
+                        <div class="actions"><a href="orders-form.html?id=1" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 處理</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">ORD202510300002</td>
+                    <td>王小明</td>
+                    <td>王小明</td>
+                    <td class="num">NT$ 3,840</td>
+                    <td><span class="badge badge-green">已完成</span></td>
+                    <td>2025-10-30 10:00</td>
+                    <td>
+                        <div class="actions"><a href="orders-form.html?id=2" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 處理</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">ORD202509150003</td>
+                    <td>王小明</td>
+                    <td>王小明</td>
+                    <td class="num">NT$ 1,880</td>
+                    <td><span class="badge badge-green">已完成</span></td>
+                    <td>2025-09-15 10:00</td>
+                    <td>
+                        <div class="actions"><a href="orders-form.html?id=3" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 處理</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">ORD202508020004</td>
+                    <td>王小明</td>
+                    <td>王小明</td>
+                    <td class="num">NT$ 2,480</td>
+                    <td><span class="badge badge-yellow">處理中</span></td>
+                    <td>2025-08-02 10:00</td>
+                    <td>
+                        <div class="actions"><a href="orders-form.html?id=4" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 處理</a></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="num">ORD202510050005</td>
+                    <td>林美華</td>
+                    <td>林美華</td>
+                    <td class="num">NT$ 1,040</td>
+                    <td><span class="badge badge-yellow">待處理</span></td>
+                    <td>2025-10-05 14:20</td>
+                    <td>
+                        <div class="actions"><a href="orders-form.html?id=5" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 處理</a></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

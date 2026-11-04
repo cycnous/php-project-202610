@@ -12,6 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // alias: 別名
+        // 記得要 use App\Http\Middleware\CheckManager;
         $middleware->alias([
             'manager' => CheckManager::class
         ]);

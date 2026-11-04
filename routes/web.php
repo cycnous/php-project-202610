@@ -24,12 +24,12 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/admin', [AdminController::class, "index"]);
 // 登入的網址, 因為resources/views/admin/login.blade.php中form的method為post, 所以要用Route::post
 Route::post("/admin/login", [AdminController::class, "login"]); // 登入
-Route::get('/admin/home', [AdminController::class, "home"]);// 後台首頁
+Route::get('/admin/home', [AdminController::class, "home"]); // 後台首頁
 
 // 帳號管理
-Route::get("/manager/list", [ManagerController::class, "list"]);//帳號管理
-Route::get("/manager/create", [ManagerController::class, "create"]);//新增帳號
-Route::post("/manager/store", [ManagerController::class, "store"]);//儲存帳號
+Route::get("/manager/list", [ManagerController::class, "list"]); //帳號管理
+Route::get("/manager/create", [ManagerController::class, "create"]); //新增帳號
+Route::post("/manager/store", [ManagerController::class, "store"]); //儲存帳號
 // {}:表示有帶資料進來, {id}中的id為變數名稱
 // 如果是{id?}有問號, 表示可能有帶資料,也可能沒帶資料
 Route::get("/manager/edit/{id}", [ManagerController::class, "edit"]); // 修改帳號
@@ -37,21 +37,42 @@ Route::post("/manager/update", [ManagerController::class, "update"]); // 更新�
 Route::get("/manager/delete/{id}", [ManagerController::class, "delete"]); // 刪除帳號
 Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"]); // 檢查帳號
 
-// 大事記管理
-Route::get('/admin/milestone/list', [MileStoneController::class, 'list']);
-// 大事記類別管理
-Route::get('/admin/milestone/types/list', [MileStoneTypeController::class, 'list']);
-// 新建大事記類別
-Route::get('/admin/milestone/types/create', [MileStoneTypeController::class, 'create']);
-// 儲存大事記類別
-Route::post('/admin/milestone/types/store', [MileStoneTypeController::class, 'store']);
-// 修改大事記類別
-Route::get('/admin/milestone/types/edit/{id}', [MileStoneTypeController::class, 'edit']);
-// 更新大事記類別
-Route::post('/admin/milestone/types/update', [MileStoneTypeController::class, 'update']);
-// 刪除大事記類別
-Route::post('/admin/milestone/types/delete', [MileStoneTypeController::class, 'delete']);
+// // 大事記管理
+// Route::get('/admin/milestone/list', [MileStoneController::class, 'list']);
+// // 大事記類別管理
+// Route::get('/admin/milestone/types/list', [MileStoneTypeController::class, 'list']);
+// // 新建大事記類別
+// Route::get('/admin/milestone/types/create', [MileStoneTypeController::class, 'create']);
+// // 儲存大事記類別
+// Route::post('/admin/milestone/types/store', [MileStoneTypeController::class, 'store']);
+// // 修改大事記類別
+// Route::get('/admin/milestone/types/edit/{id}', [MileStoneTypeController::class, 'edit']);
+// // 更新大事記類別
+// Route::post('/admin/milestone/types/update', [MileStoneTypeController::class, 'update']);
+// // 刪除大事記類別
+// Route::post('/admin/milestone/types/delete', [MileStoneTypeController::class, 'delete']);
 
+// 大事記
+// group: 群組; prefix: 前置詞
+// 透過群組+前置詞整理路由, 以方便管理及維護
+Route::group(['middleware' => 'manager', 'prefix' => 'admin/milestone'], function () {
+    // 大事記列表
+    Route::get('list', [MileStoneController::class, 'list']);
+    Route::get('add', [MileStoneController::class, 'add']);
+    Route::post('store', [MileStoneController::class, 'store']);
+    Route::get('edit/{id}', [MileStoneController::class, 'edit']);
+    Route::post('update', [MileStoneController::class, 'update']);
+    Route::post('delete', [MileStoneController::class, 'delete']);
+
+    Route::group(['prefix' => 'types'], function () {
+        Route::get('list', [MileStoneTypeController::class, 'list']);
+        Route::get('create', [MileStoneTypeController::class, 'create']);
+        Route::post('store', [MileStoneTypeController::class, 'store']);
+        Route::get('edit/{id}', [MileStoneTypeController::class, 'edit']);
+        Route::post('update', [MileStoneTypeController::class, 'update']);
+        Route::post('delete', [MileStoneTypeController::class, 'delete']);
+    });
+});
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);
