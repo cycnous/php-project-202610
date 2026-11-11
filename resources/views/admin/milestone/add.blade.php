@@ -8,35 +8,42 @@
     </div>
     <div class="admin-card-body">
         <!-- 網址帶 ?id=編號 時為「修改」，會自動帶入資料 -->
-        <form class="admin-form" data-back="/admin/milestone/list" novalidate>
+        <form class="admin-form" action='store' method='post'>
+            @csrf
             <div class="form-row-3">
                 <div class="form-group">
                     <label class="form-label" for="f_year">年份 <span class="req">*</span></label>
-                    <input type="number" id="f_year" name="year" value="2026" class="form-control" required>
+                    <!-- <input type="number" id="f_year" name="year" value="2026" class="form-control" required> -->
+                    <select name="year" id="f_year" class="form-control" required>
+                        <option value="">請選擇年份</option>
+                        {{-- 這段是程式註解, 要用'大括號'
+                             date('Y') 取日期中的年份 
+                             range: 範圍(區間)
+                             foreach: 迴圈, 也可以用for迴圈(for ... endfor) --}}
+                        @foreach(range(date('Y'), date('Y')-10) as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="f_month">月份</label>
                     <select id="f_month" name="month" class="form-control">
-                        <option value="1">1 月</option>
-                        <option value="2">2 月</option>
-                        <option value="3">3 月</option>
-                        <option value="4">4 月</option>
-                        <option value="5">5 月</option>
-                        <option value="6">6 月</option>
-                        <option value="7">7 月</option>
-                        <option value="8">8 月</option>
-                        <option value="9">9 月</option>
-                        <option value="10">10 月</option>
-                        <option value="11">11 月</option>
-                        <option value="12">12 月</option>
+                        <option value="">請選擇月份</option>
+                        {{-- str_pad: 將字串補足至指定長度
+                             str_pad( 原始文字, 指定長度, 要補足的文字, 要補足的位置)
+                             STR_PAD_LEFT: 左邊; STR_PAD_RIGHT: 右邊; STR_PAD_BOTH: 兩邊 --}}
+                        @foreach(range(1,12) as $month)
+                        <option value="{{ str_pad( $month, 2, '0', STR_PAD_LEFT ) }}">{{ $month }} 月</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="f_tag_type">類型</label>
-                    <select id="f_tag_type" name="tag_type" class="form-control">
-                        <option value="milestone">里程碑</option>
-                        <option value="product">產品</option>
-                        <option value="award">獲獎 / 認證</option>
+                    <select id="f_tag_type" name="typeId" class="form-control">
+                        <option value="">請選擇類型</option>
+                        @foreach($types as $data)
+                        <option value="{{ $data -> id }}">{{ $data -> title }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -45,24 +52,11 @@
                 <input type="text" id="f_title" name="title" value="" class="form-control" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="f_description">說明</label>
-                <textarea id="f_description" name="description" rows="3" class="form-control"></textarea>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label" for="f_tag_label">標籤文字</label>
-                    <input type="text" id="f_tag_label" name="tag_label" value="" class="form-control" placeholder="例：里程碑 / 展店 / 認證">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="f_icon">標籤圖示</label>
-                    <div class="input-icon-wrap">
-                        <i class="fa fa-star icon" id="f_icon_icon"></i>
-                        <input type="text" id="f_icon" name="icon" value="" class="form-control" placeholder="fa-star" data-icon-preview="f_icon_icon">
-                    </div>
-                </div>
+                <label class="form-label" for="f_description">內容</label>
+                <textarea id="f_description" name="content" rows="3" class="form-control"></textarea>
             </div>
             <div class="form-group">
-                <label class="form-check"><input type="checkbox" name="is_highlight" value="1"> 重點事件（時間軸顯示金色圓點）</label>
+                <label class="form-check"><input type="checkbox" name="point" value="Y"> 重點事件（時間軸顯示金色圓點）</label>
             </div>
 
             <div class="form-actions">

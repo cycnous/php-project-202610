@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MileStoneController;
 use App\Http\Controllers\Admin\MileStoneTypeController;
+use App\Http\Controllers\Front\FrontMileStoneController as MileStone;
 use App\Http\Controllers\Front\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +25,10 @@ Route::get('/', [IndexController::class, 'index']);
 Route::get('/admin', [AdminController::class, "index"]);
 // 登入的網址, 因為resources/views/admin/login.blade.php中form的method為post, 所以要用Route::post
 Route::post("/admin/login", [AdminController::class, "login"]); // 登入
-Route::get('/admin/home', [AdminController::class, "home"]); // 後台首頁
+Route::get('/admin/home', [AdminController::class, "home"])->middleware('manager'); // 後台首頁
 
 // 帳號管理
-Route::get("/manager/list", [ManagerController::class, "list"]); //帳號管理
+Route::get("/manager/list", [ManagerController::class, "list"])->middleware('manager'); //帳號管理
 Route::get("/manager/create", [ManagerController::class, "create"]); //新增帳號
 Route::post("/manager/store", [ManagerController::class, "store"]); //儲存帳號
 // {}:表示有帶資料進來, {id}中的id為變數名稱
@@ -73,6 +74,8 @@ Route::group(['middleware' => 'manager', 'prefix' => 'admin/milestone'], functio
         Route::post('delete', [MileStoneTypeController::class, 'delete']);
     });
 });
+
+Route::get('milestone', [MileStone::class, 'list']);
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);

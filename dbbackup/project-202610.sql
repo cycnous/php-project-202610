@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-10-30 07:11:51
+-- 產生時間： 2026-11-11 04:44:57
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -57,8 +57,18 @@ CREATE TABLE `milestone` (
   `months` char(2) NOT NULL COMMENT '月',
   `title` varchar(200) NOT NULL COMMENT '標題',
   `content` varchar(500) NOT NULL COMMENT '內容',
+  `point` char(1) DEFAULT NULL COMMENT '重點事件(Y/N)',
   `createTime` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '建立時間'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='大事記';
+
+--
+-- 傾印資料表的資料 `milestone`
+--
+
+INSERT INTO `milestone` (`id`, `typeId`, `years`, `months`, `title`, `content`, `point`, `createTime`) VALUES
+(1, 1, '2025', '11', '年度客戶感謝活動圓滿落幕', '年度客戶感謝活動圓滿落幕', NULL, '2026-11-04 07:22:39'),
+(2, 3, '2026', '01', '獲獎', '獲獎...\r\n恭喜...', NULL, '2026-11-11 02:56:59'),
+(3, 4, '2022', '04', '新產品 ...', '產品內容 ....\r\n...', 'Y', '2026-11-11 02:57:36');
 
 -- --------------------------------------------------------
 
@@ -79,7 +89,8 @@ CREATE TABLE `milestone_type` (
 
 INSERT INTO `milestone_type` (`id`, `label`, `title`) VALUES
 (1, 'gold', '里程碑'),
-(2, 'green', '獲獎');
+(3, 'green', '獲獎/認證'),
+(4, 'brand', '產品');
 
 --
 -- 已傾印資料表的索引
@@ -117,13 +128,13 @@ ALTER TABLE `manager`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `milestone`
 --
 ALTER TABLE `milestone`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `milestone_type`
 --
 ALTER TABLE `milestone_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

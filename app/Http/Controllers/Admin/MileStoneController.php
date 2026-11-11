@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Milestone\MileStone;
+use App\Models\Milestone\MileStoneType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MileStoneController extends Controller
 {
@@ -23,11 +25,31 @@ class MileStoneController extends Controller
 
    public function add()
    {
-      return view('admin.milestone.add');
+      $types = MileStoneType::get();
+      return view('admin.milestone.add', compact('types'));
    }
 
-   public function store()
+   public function store(Request $req)
    {
-      
+      // 因為內容是文字框, 可能會有換行, 所以要另外做處理
+      $content = $req->content;
+      if (!empty($content)) {
+         // str_replace: 取代
+         // str_replace( 要被取代的內容, 新的內容, 存在哪個變數 )
+         // \n: 輸入框的換行(Enter), new line
+         // <br/>: 網頁的換行
+         $content = str_replace('\n', '<br/>', $content);
+      }
+      $ms = new MileStone();
+      $ms->typeId = $req->typeId;
+      $ms->years = $req->year;
+      $ms->months = $req->month;
+      $ms->title = $req->title;
+      $ms->content = $content;
+      $ms->point = $req->point;
+      $ms->save();
+
+      Session::flash('message', '已新增');
+      return redirect('/admin/milestone/list');
    }
 }
