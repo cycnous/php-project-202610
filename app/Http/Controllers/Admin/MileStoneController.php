@@ -52,4 +52,40 @@ class MileStoneController extends Controller
       Session::flash('message', '已新增');
       return redirect('/admin/milestone/list');
    }
+
+   public function edit(Request $req)
+   {
+      $ms = MileStone::find($req->id);
+      $types = MileStoneType::get();
+      return view('admin.milestone.edit', compact('ms', 'types'));
+   }
+
+   public function update(Request $req)
+   {
+      // 因為內容是文字框, 可能會有換行, 所以要另外做處理
+      $content = $req->content;
+      if (!empty($content)) {
+         $content = str_replace('\n', '<br/>', $content);
+      }
+      $ms = MileStone::find($req->id);
+      $ms->typeId = $req->typeId;
+      $ms->years = $req->year;
+      $ms->months = $req->month;
+      $ms->title = $req->title;
+      $ms->content = $content;
+      $ms->point = $req->point;
+      $ms->save();
+
+      Session::flash('message', '已更新');
+      return redirect('/admin/milestone/list');
+   }
+
+   public function delete(Request $req)
+   {
+      MileStone::destroy($req->id);
+      Session::flash('message', '已刪除');
+      // return redirect('/admin/milestone/list');
+      // 使用路由下的 name (取別名)
+      return redirect()->route('mile');
+   }
 }

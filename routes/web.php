@@ -58,7 +58,7 @@ Route::post("/manager/checkAccount", [ManagerController::class, "checkAccount"])
 // 透過群組+前置詞整理路由, 以方便管理及維護
 Route::group(['middleware' => 'manager', 'prefix' => 'admin/milestone'], function () {
     // 大事記列表
-    Route::get('list', [MileStoneController::class, 'list']);
+    Route::get('list', [MileStoneController::class, 'list'])->name('mile');
     Route::get('add', [MileStoneController::class, 'add']);
     Route::post('store', [MileStoneController::class, 'store']);
     Route::get('edit/{id}', [MileStoneController::class, 'edit']);

@@ -25,7 +25,7 @@
 
     <!-- 新增 doDelete function -->
     <script>
-        function doDelete(id, btn) {
+        function doDelete(id, btn, url) {
             // 引用 sweetalert2 的 A dialog with three buttons
             Swal.fire({
                 icon: "warning",
@@ -38,7 +38,7 @@
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/admin/milestone/types/delete',
+                        url: url,
                         type: 'post',
                         data: {
                             id: id,

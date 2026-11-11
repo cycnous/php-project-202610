@@ -36,15 +36,15 @@
       <tbody>
         @foreach($list as $data)
         <tr data-row data-tag_type="milestone">
-          <td class="num text-muted">1</td>
+          <td class="num text-muted">{{ $data->id }}</td>
           <td data-mark>{{ $data->years }} / {{ $data->months }}</td>
           <td data-mark>{{ $data->title }}</td>
-          <td><span class="badge badge-{{ $data->types->label }}" data-mark>{{ $data->types->title }}</span></td>
+          <td><span class="event-tag tag-{{ $data->types->label }}" data-mark>{{ $data->types->title }}</span></td>
           <td data-mark>{{ $data->types->title }}</td>
           <td>
             <div class="actions">
               <a href="edit/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
-              <button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{ $data->id }}')">
+              <button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{ $data->id }}', this, '/admin/milestone/delete')">
                 <i class="fa fa-trash"></i> 刪除</button>
             </div>
           </td>
