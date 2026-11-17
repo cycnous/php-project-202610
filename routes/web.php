@@ -77,7 +77,9 @@ Route::group(['middleware' => 'manager', 'prefix' => 'admin/milestone'], functio
     });
 });
 
-// 別名
+include 'admin/product.php';
+
+// 別名-前台大事記
 Route::get('milestone', [MileStone::class, 'list']);
 
 // AI大事記

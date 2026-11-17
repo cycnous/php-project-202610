@@ -105,7 +105,7 @@
             <div class="nav-group">產品</div>
             <a href="/admin/product"{!! Request::is('admin/product') ? " class='active'" : "" !!}>
                 <i class="fa fa-box-open"></i> 產品管理</a>
-            <a href="/admin/product-categorie"{!! Request::is('admin/product-categorie') ? " class='active'" : "" !!}>
+            <a href="/admin/product/types/list"{!! Request::is('admin/product/types/*') ? " class='active'" : "" !!}>
                 <i class="fa fa-folder-open"></i> 產品分類</a>
             <div class="nav-group">會員與訂單</div>
             <a href="/admin/order"{!! Request::is('admin/order') ? " class='active'" : "" !!}>
