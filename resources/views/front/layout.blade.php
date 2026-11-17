@@ -125,7 +125,7 @@
 
         function heroGo(n) {
             heroIndex = (n + totalSlides) % totalSlides;
-            document.getElementById('heroSlides').style.transform = `translateX(-${heroIndex * 100}%)`;
+            // document.getElementById('heroSlides').style.transform = `translateX(-${heroIndex * 100}%)`;
             document.querySelectorAll('.hero-dot').forEach((d, i) => d.classList.toggle('active', i === heroIndex));
             clearInterval(heroTimer);
             heroTimer = setInterval(() => heroMove(1), 5000);

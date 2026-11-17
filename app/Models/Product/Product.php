@@ -10,10 +10,15 @@ class Product extends Model
     public $timestamps = false;
     protected $table = 'product';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'productName', 'title', 'productNo', 'price', 'salePrice', 'qty', 'content', 'createTime'];
+    protected $fillable = ['id', 'labelId', 'typeId',  'productName', 'title', 'productNo', 'price', 'salePrice', 'qty', 'content', 'createTime'];
 
     public function types(): BelongsTo
     {
         return $this->belongsTo(ProductType::class, 'typeId', 'id');
+    }
+
+    public function labels(): BelongsTo
+    {
+        return $this->belongsTo(ProductLabel::class, 'labelId', 'id');
     }
 }

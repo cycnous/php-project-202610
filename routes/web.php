@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\MileStoneController;
 use App\Http\Controllers\Admin\MileStoneTypeController;
+use App\Http\Controllers\Front\AiMileStoneController;
 use App\Http\Controllers\Front\FrontMileStoneController as MileStone;
 use App\Http\Controllers\Front\IndexController;
+use App\Models\Milestone\AiMileStone;
 use Illuminate\Support\Facades\Route;
 
 // 所有的網址(超連結, href)或表單(form)都要在路由設定
@@ -75,7 +77,12 @@ Route::group(['middleware' => 'manager', 'prefix' => 'admin/milestone'], functio
     });
 });
 
+// 別名
 Route::get('milestone', [MileStone::class, 'list']);
+
+// AI大事記
+Route::get('ai', [AiMileStoneController::class, 'index']);
+Route::get('ai/word', [AiMileStoneController::class, 'word']);
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);
