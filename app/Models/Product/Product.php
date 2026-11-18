@@ -34,4 +34,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductSpec::class, 'productId', 'id');
     }
+
+    // 取第一張圖, 放在產品列表的
+    public function firstPhoto()
+    {
+        return $this->photos()->first();
+    }
 }
