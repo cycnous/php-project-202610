@@ -47,7 +47,7 @@
                     <tr data-row data-product_category_id="1" data-is_active="1">
                         <td>
                             @if($data->firstPhoto())
-                                <img src="/product/S/{{ $data->firstPhoto()->photo }}">
+                                <img src="{{ $data->firstPhoto()->small() }}">
                             @else
                                 <div class="thumb-ph ph"><i class="fa fa-cube"></i></div>
                             @endif

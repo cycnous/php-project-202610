@@ -14,6 +14,7 @@ Route::group(['middleware' => 'manager', 'prefix' => 'admin/product'], function 
         Route::get('edit/{id}', [ProductController::class, 'edit']);
         Route::post('update', [ProductController::class, 'update']);
         Route::post('delete', [ProductController::class, 'delete']);
+        Route::post('doAI', [ProductController::class, 'doAI']);
     });
 
     // 產品類別
