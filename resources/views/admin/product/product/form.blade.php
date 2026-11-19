@@ -1,7 +1,7 @@
 <div class="form-row">
     <div class="form-group">
         <label class="form-label" for="f_product_category_id">分類 <span class="req">*</span></label>
-        <select id="f_product_category_id" name="product_category_id" class="form-control" required>
+        <select id="f_product_category_id" name="typeId" class="form-control" required>
             <option value="">請選擇分類</option>
             @foreach($types as $data)
             <option value="{{ $data->id }}">{{ $data->title }}</option>
@@ -10,7 +10,7 @@
     </div>
     <div class="form-group">
         <label class="form-label" for="f_product_category_id">標籤 <span class="req">*</span></label>
-        <select id="f_product_category_id" name="product_category_id" class="form-control">
+        <select id="f_product_category_id" name="labelId" class="form-control">
             <option value="">請選擇標籤</option>
             @foreach($labels as $data)
             <option value="{{ $data->id }}">{{ $data->label }}</option>

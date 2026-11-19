@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductLabelController;
+use App\Http\Controllers\Admin\Product\ProductPhotoController;
 use App\Http\Controllers\Admin\Product\ProductTypeController;
 
 // 後台產品
@@ -35,5 +36,16 @@ Route::group(['middleware' => 'manager', 'prefix' => 'admin/product'], function 
         Route::get('edit/{id}', [ProductLabelController::class, 'edit']);
         Route::post('update', [ProductLabelController::class, 'update']);
         Route::post('delete', [ProductLabelController::class, 'delete']);
+    });
+
+    // 產品圖
+    Route::group(['prefix' => 'photo'], function () {
+        // productId?: 表示不一定會有 productId 這個參數
+        Route::get('list/{productId?}', [ProductPhotoController::class, 'list']);
+        Route::get('create', [ProductPhotoController::class, 'create']);
+        Route::post('store', [ProductPhotoController::class, 'store']);
+        Route::get('edit/{id}', [ProductPhotoController::class, 'edit']);
+        Route::post('update', [ProductPhotoController::class, 'update']);
+        Route::post('delete', [ProductPhotoController::class, 'delete']);
     });
 });
