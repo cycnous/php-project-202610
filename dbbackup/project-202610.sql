@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2026-11-11 09:10:28
+-- 產生時間： 2026-11-25 09:01:42
 -- 伺服器版本： 10.4.32-MariaDB
 -- PHP 版本： 8.2.12
 
@@ -102,6 +102,8 @@ INSERT INTO `milestone_type` (`id`, `label`, `title`) VALUES
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
+  `labelId` int(11) DEFAULT NULL,
+  `typeId` int(11) DEFAULT NULL,
   `productName` varchar(100) DEFAULT NULL COMMENT '品名',
   `title` varchar(200) DEFAULT NULL COMMENT '標題',
   `productNo` varchar(30) DEFAULT NULL COMMENT '產品編號',
@@ -111,6 +113,14 @@ CREATE TABLE `product` (
   `content` text DEFAULT NULL COMMENT '產品內容',
   `createTime` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '建立時間'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='產品資料表';
+
+--
+-- 傾印資料表的資料 `product`
+--
+
+INSERT INTO `product` (`id`, `labelId`, `typeId`, `productName`, `title`, `productNo`, `price`, `salePrice`, `qty`, `content`, `createTime`) VALUES
+(1, 1, 1, '紅茶拿鐵', '濃郁紅茶香與奶香交織的順口拿鐵', 'A-00001', 70, 60, NULL, '一口入口，即被紅茶的自然甘醇與濃郁奶香環繞，香氣層層展開，讓人瞬間感受到茶與咖啡的完美平衡。每一口都像是在品味手工調配的藝術。\r\n絲滑的奶泡覆蓋在熱騰騰的茶湯上，口感柔順不苦澀，適合早晨提神、午後小憩，亦是與朋友共享的甜美時光。\r\n採用密封瓶裝設計，保存茶香新鮮，隨時隨地只需搖勻即可享受，讓忙碌的生活多一份悠閒與暖心。', '2026-11-25 01:51:51'),
+(2, 1, 1, '烏龍拿鐵', '烏龍茶香融合咖啡醇厚，雙重風味的烏龍拿鐵', 'A-00002', 70, 60, NULL, '烏龍拿鐵將清新的烏龍茶香與醇厚的咖啡結合，創造出獨特的層次感，讓每一口都充滿驚喜。\r\n選用頂級烏龍茶葉與新鮮研磨咖啡豆，搭配細緻奶泡，口感柔順不苦澀，適合想要換換口味的咖啡愛好者。\r\n低糖配方保留天然甘甜，提神又不易上火，無論是晨間提神或午後小憩，都能帶來舒適的暖意。\r\n方便即飲包裝，隨時隨地沖泡，讓你在忙碌生活中也能輕鬆享受精品咖啡與烏龍的雙重滋味。', '2026-11-25 02:38:32');
 
 -- --------------------------------------------------------
 
@@ -124,6 +134,14 @@ CREATE TABLE `product_label` (
   `label` varchar(10) NOT NULL COMMENT '標籤名稱'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='產品標籤';
 
+--
+-- 傾印資料表的資料 `product_label`
+--
+
+INSERT INTO `product_label` (`id`, `label`) VALUES
+(1, '新品'),
+(2, '暢銷品');
+
 -- --------------------------------------------------------
 
 --
@@ -133,10 +151,18 @@ CREATE TABLE `product_label` (
 DROP TABLE IF EXISTS `product_photo`;
 CREATE TABLE `product_photo` (
   `id` int(11) NOT NULL,
-  `productId` int(11) DEFAULT NULL COMMENT '產品編號',
+  `productId` int(11) DEFAULT NULL,
   `photo` varchar(30) DEFAULT NULL COMMENT '產品圖',
   `createTime` timestamp NOT NULL DEFAULT current_timestamp() COMMENT '建立時間'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='產品圖';
+
+--
+-- 傾印資料表的資料 `product_photo`
+--
+
+INSERT INTO `product_photo` (`id`, `productId`, `photo`, `createTime`) VALUES
+(5, 1, '20261125_6b068c679ecac.jpg', '2026-11-25 07:21:11'),
+(6, 1, '20261125_6b068c67a9acd.jpg', '2026-11-25 07:21:11');
 
 -- --------------------------------------------------------
 
@@ -147,11 +173,19 @@ CREATE TABLE `product_photo` (
 DROP TABLE IF EXISTS `product_spec`;
 CREATE TABLE `product_spec` (
   `id` int(11) NOT NULL,
-  `productId` int(11) DEFAULT NULL COMMENT '產品編號',
+  `productId` int(11) DEFAULT NULL,
   `title` varchar(30) DEFAULT NULL COMMENT '規格名稱',
-  `content` int(11) DEFAULT NULL COMMENT '規格內容',
+  `content` varchar(100) DEFAULT NULL COMMENT '規格內容',
   `createTime` timestamp NULL DEFAULT current_timestamp() COMMENT '建立時間'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='產品規格';
+
+--
+-- 傾印資料表的資料 `product_spec`
+--
+
+INSERT INTO `product_spec` (`id`, `productId`, `title`, `content`, `createTime`) VALUES
+(1, 1, '規格', '123', '2026-11-25 07:19:15'),
+(2, 1, 'asd', 'ko', '2026-11-25 07:20:38');
 
 -- --------------------------------------------------------
 
@@ -164,6 +198,15 @@ CREATE TABLE `product_type` (
   `id` int(11) NOT NULL,
   `title` varchar(20) DEFAULT NULL COMMENT '系列名稱'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='產品分類';
+
+--
+-- 傾印資料表的資料 `product_type`
+--
+
+INSERT INTO `product_type` (`id`, `title`) VALUES
+(1, '類別一'),
+(3, '類別二'),
+(4, '類別三');
 
 --
 -- 已傾印資料表的索引
@@ -243,31 +286,31 @@ ALTER TABLE `milestone_type`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_label`
 --
 ALTER TABLE `product_label`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_photo`
 --
 ALTER TABLE `product_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_spec`
 --
 ALTER TABLE `product_spec`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product_type`
 --
 ALTER TABLE `product_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

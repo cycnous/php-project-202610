@@ -14,7 +14,7 @@ class ImageService
         //
     }
 
-    public function makeThumb($src, $dest, $width)
+    public static function makeThumb($src, $dest, $width)
     {
         $img = '';
         // 如果沒有 GD 函式庫

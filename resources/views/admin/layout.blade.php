@@ -104,7 +104,7 @@
             <a href="/admin/news-categorie" {!! Request::is('admin/news-categorie') ? " class='active'" : "" !!}>
                 <i class="fa fa-folder"></i> 消息分類</a>
             <div class="nav-group">產品</div>
-            <a href="/admin/product/product/list" {!! Request::is('admin/product/product/*') ? " class='active'" : "" !!}>
+            <a href="/admin/product/product/list" {!! Request::is('admin/product/product/*', 'admin/product/photo/*', 'admin/product/spec/*') ? " class='active'" : "" !!}>
                 <i class="fa fa-box-open"></i> 產品管理</a>
             <a href="/admin/product/types/list" {!! Request::is('admin/product/types/*') ? " class='active'" : "" !!}>
                 <i class="fa fa-folder-open"></i> 產品分類</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MileStoneTypeController;
 use App\Http\Controllers\Front\AiMileStoneController;
 use App\Http\Controllers\Front\FrontMileStoneController as MileStone;
 use App\Http\Controllers\Front\IndexController;
+use App\Http\Controllers\Front\ProductController;
 use App\Models\Milestone\AiMileStone;
 use Illuminate\Support\Facades\Route;
 
@@ -85,6 +86,7 @@ Route::get('milestone', [MileStone::class, 'list']);
 // AI大事記
 Route::get('ai', [AiMileStoneController::class, 'index']);
 Route::get('ai/word', [AiMileStoneController::class, 'word']);
+Route::get('/products', [ProductController::class, 'list']);
 
 // Route::group(['prefix' => 'admin'], function(){
 //     Route::get('/', [AdminController::class, 'index']);

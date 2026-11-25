@@ -10,4 +10,9 @@ class ProductSpec extends Model
     protected $table = 'product_spec';
     protected $primaryKey = 'id';
     protected $fillable = ['id', 'productId', 'title', 'content',  'createTime'];
+
+    public static function getSpec($productId){
+        $list = self::where('productId', $productId)->get();
+        return $list;
+    }
 }

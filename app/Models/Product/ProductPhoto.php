@@ -26,7 +26,7 @@ class ProductPhoto extends Model
     // 小圖
     public function small()
     {
-        return '/' . self::path . '/S' . $this->photo;
+        return '/' . self::path . '/S/' . $this->photo;
     }
 
     // 產品圖屬於哪個產品

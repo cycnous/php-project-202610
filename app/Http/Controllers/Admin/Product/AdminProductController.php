@@ -10,7 +10,7 @@ use App\Models\Product\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ProductController extends Controller
+class AdminProductController extends Controller
 {
     public function list()
     {

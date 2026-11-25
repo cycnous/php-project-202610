@@ -17,10 +17,10 @@
 </script>
 <div class="admin-card" data-crud-list>
     <div class="admin-card-header">
-        <h2><i class="fa fa-image"></i> 產品圖: {{ $product?->productNo }} {{ $product?->productName }}</h2>
+        <h2><i class="fa fa-image"></i> 產品圖: {{ $product->productNo }} {{ $product->productName }}</h2>
         <div class="admin-toolbar">
-            <a href="../spec/list/{{ $productId }}" class="btn btn-outline btn-sm"><i class="fa fa-list-ul"></i> 產品規格</a>
-            <a href="../list" class="btn btn-light btn-sm"><i class="fa fa-arrow-left"></i> 回產品列表</a>
+            <a href="/admin/product/spec/list/{{ $productId }}" class="btn btn-outline btn-sm"><i class="fa fa-list-ul"></i> 產品規格</a>
+            <a href="../../product/list" class="btn btn-light btn-sm"><i class="fa fa-arrow-left"></i> 回產品列表</a>
         </div>
     </div>
     <div class="admin-card-body">
@@ -70,7 +70,7 @@
                     </td>
                     <td class="text-center">{{ $data->photo }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{ $data->id }}', this, '/admin/product/photo/delete')"><i class="fa fa-trush"></i></button>
+                        <button type="button" class="btn btn-danger-outline btn-xs" onclick="doDelete('{{ $data->id }}', this, '/admin/product/photo/delete')"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
                 @empty

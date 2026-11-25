@@ -43,36 +43,40 @@
             </thead>
             <tbody>
                 @if (!empty($list) && sizeof($list)>0)
-                    @foreach($list as $data)
-                    <tr data-row data-product_category_id="1" data-is_active="1">
-                        <td>
-                            @if($data->firstPhoto())
-                                <img src="{{ $data->firstPhoto()->small() }}">
-                            @else
-                                <div class="thumb-ph ph"><i class="fa fa-cube"></i></div>
-                            @endif
-                        </td>
-                        <td data-mark>{{ $data->productNo }}</td>
-                        <td data-mark>{{ $data->productName }}</td>
-                        <td><span class="badge badge-brand" data-mark>{{ $data->types->title }}</span></td>
-                        <td class="num">NT$ {{ $data->salePrice }}</td>
-                        <td>{{ $data->qty }}</td>
-                        <td><span class="badge badge-green">{{ $data->labels->label }}</span></td>
-                        <td><span class="badge badge-green">上架</span></td>
-                        <td>
-                            <div class="actions"><a href="products-form.html?id=1" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
-                            <button type="button" class="btn btn-danger-outline btn-xs" data-delete data-name="旗艦系列 A1 精品"><i class="fa fa-trash"></i> 刪除</button></div>
-                        </td>
-                    </tr>
-                    @endforeach
+                @foreach($list as $data)
+                <tr data-row data-product_category_id="1" data-is_active="1">
+                    <td>
+                        @if($data->firstPhoto())
+                        <img src="{{ $data->firstPhoto()->small() }}">
+                        @else
+                        <div class="thumb-ph ph"><i class="fa fa-cube"></i></div>
+                        @endif
+                    </td>
+                    <td data-mark>{{ $data->productNo }}</td>
+                    <td data-mark>{{ $data->productName }}</td>
+                    <td><span class="badge badge-brand" data-mark>{{ $data->types->title }}</span></td>
+                    <td class="num">NT$ {{ $data->salePrice }}</td>
+                    <td>{{ $data->qty }}</td>
+                    <td><span class="badge badge-green">{{ $data->labels->label }}</span></td>
+                    <td><span class="badge badge-green">上架</span></td>
+                    <td>
+                        <div class="actions">
+                            <a href="edit/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-edit"></i> 修改</a>
+                            <a href="../photo/list/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-image"></i> 圖檔</a>
+                            <a href="../spec/list/{{ $data->id }}" class="btn btn-outline btn-xs"><i class="fa fa-list-ul"></i> 規格</a>
+                            <button type="button" class="btn btn-danger-outline btn-xs" data-delete data-name="旗艦系列 A1 精品"><i class="fa fa-trash"></i> 刪除</button>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
                 @else
-                    <tr data-empty class="hidden">
-                        <td colspan="9">
-                            <div class="empty-state"><i class="fa fa-search"></i>
-                                <p>找不到符合的資料</p>
-                            </div>
-                        </td>
-                    </tr>
+                <tr data-empty class="hidden">
+                    <td colspan="9">
+                        <div class="empty-state"><i class="fa fa-search"></i>
+                            <p>找不到符合的資料</p>
+                        </div>
+                    </td>
+                </tr>
                 @endif
             </tbody>
         </table>
