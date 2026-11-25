@@ -63,6 +63,6 @@ class ProductController extends Controller
         $product->save();
 
         Session::flash('message', '已新增, 可以繼續上傳產品圖及建立產品規格');
-        return redirect('/admin/product/product/list/' . $product->id);
+        return redirect('/admin/product/photo/list/' . $product->id);
     }
 }

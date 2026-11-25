@@ -255,6 +255,7 @@ footer.site-footer {
 }
 .btn:disabled { opacity: .6; cursor: not-allowed; }
 .btn-primary { background: var(--brand); color: var(--white); }
+.btn-success { background: var(--success); color: var(--white); }
 .btn-primary:hover { background: var(--brand-dark); }
 .btn-gold { background: var(--gold); color: var(--brand-dark); }
 .btn-gold:hover { background: var(--gold-dark); }

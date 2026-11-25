@@ -34,4 +34,11 @@ class ProductPhoto extends Model
     {
         return $this->belongsTo(Product::class, 'productId', 'id');
     }
+
+    // 某產品的產品圖
+    public function getList($productId)
+    {
+        $list = self::where('productId', $productId)->get();
+        return $list;
+    }
 }
